@@ -10,6 +10,9 @@ if [ "$FTP_PASS" = "**Random**" ]; then
     export FTP_PASS=`cat /dev/urandom | tr -dc A-Z-a-z-0-9 | head -c${1:-16}`
 fi
 
+userdel www-data
+groupmod -g 33 ftp
+
 # Do not log to STDOUT by default:
 if [ "$LOG_STDOUT" = "**Boolean**" ]; then
     export LOG_STDOUT=''
